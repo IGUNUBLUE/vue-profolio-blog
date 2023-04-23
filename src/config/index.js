@@ -1,5 +1,4 @@
 const config = {
-  baseURL: import.meta.env.VITE_BASE_URL,
   githubUsername: import.meta.env.VITE_GITHUB_USERNAME,
   notionTableId: import.meta.env.VITE_NOTION_TABLE_ID,
   notionAboutPageId: import.meta.env.VITE_NOTION_ABOUT_PAGE_ID,
