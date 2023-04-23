@@ -16,8 +16,8 @@ pnpm dev
 ```
 The last one is to start your local environment. Check the *package.json* file to more scripts.
 ### Deploy (vercel)
-- create a project a select the project repository.
-- create the environments variables.
+- create a project and select the project repository.
+- create environment variables.
 - ready
 ### TODO:
 - Fix styles
