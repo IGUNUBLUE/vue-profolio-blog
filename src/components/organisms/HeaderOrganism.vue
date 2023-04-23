@@ -17,10 +17,10 @@ const config = inject('config')
           </RouterLink>
         </div>
 
-        <div class="flex flex-row">
+        <!-- <div class="flex flex-row">
           <RouterLink class="nav-link" to="/posts">Blog</RouterLink>
           <RouterLink class="nav-link" to="/about">About</RouterLink>
-        </div>
+        </div> -->
       </div>
     </nav>
   </div>
