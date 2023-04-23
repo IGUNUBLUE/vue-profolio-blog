@@ -77,8 +77,8 @@ onMounted(async () => {
     <div class="wrapper-small my-5">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <a
-          v-for="(project, index) in projects"
-          :key="index"
+          v-for="project in projects"
+          :key="project.id"
           :href="project.html_url"
           class="block bg-gray-50 dark:bg-gray-800 p-6 shadow rounded-lg mt-2 lg:mt-0"
           rel="noreferrer"
