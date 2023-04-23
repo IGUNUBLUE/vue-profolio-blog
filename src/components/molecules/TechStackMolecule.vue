@@ -7,6 +7,7 @@ import StyledComponentsAtomIcon from '@atoms/icons/StyledComponentsAtomIcon.vue'
 import CssAtomIcon from '@atoms/icons/CssAtomIcon.vue'
 import MongoDbAtomIcon from '@atoms/icons/MongoDbAtomIcon.vue'
 import NodeAtomIcon from '@atoms/icons/NodeAtomIcon.vue'
+import DoubleDownAtomIcon from '@atoms/icons/DoubleDownAtomIcon.vue'
 </script>
 
 <template>
@@ -15,7 +16,7 @@ import NodeAtomIcon from '@atoms/icons/NodeAtomIcon.vue'
       class="flex justify-center items-center text-base font-semibold text-gray-600 dark:text-gray-300"
     >
       <h2 class="text-center">Tech stack I use</h2>
-      <IconDoubleDown class="h-4 w-4" />
+      <DoubleDownAtomIcon class="h-4 w-4" />
     </div>
 
     <div class="flex flex-wrap justify-center items-center text-4xl mt-5">
