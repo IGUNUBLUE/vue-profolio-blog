@@ -10,6 +10,7 @@ const config = {
   devTwitterLink: import.meta.env.VITE_DEV_TWITTER_LINK,
   devLinkedinLink: import.meta.env.VITE_DEV_LINKEDIN_LINK,
   devLogo: import.meta.env.VITE_DEV_LOGO,
+  highlightedRepoNames: import.meta.env.VITE_HIGHLIGHTED_REPO_NAMES
 }
 
 export default config

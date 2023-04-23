@@ -10,13 +10,25 @@ import useAxios from '@hooks/useAxios'
 
 const config = inject('config')
 const projects = ref([])
+const urlApiGithubStarts = `https://api.github.com/search/repositories?q=user:${config.githubUsername}&sort=stars&per_page=3`
+const urlApiGithub = `https://api.github.com/users/${config.githubUsername}/repos`
 const { isLoading, isSuccess, isError, execRequest } = useAxios()
 
 onMounted(async () => {
-  const result = await execRequest(
-    `https://api.github.com/search/repositories?q=user:${config.githubUsername}&sort=stars&per_page=3`
-  )
-  projects.value = result?.items
+  const isWithStarts = config.highlightedRepoNames === 'starts'
+  const result = await execRequest(isWithStarts ? urlApiGithubStarts: urlApiGithub)
+
+  if(isWithStarts) {
+    projects.value = result?.items
+    return
+  }
+
+  const reposEnv = config.highlightedRepoNames.split(',')
+  const selectedRepos = result?.filter((repo) => {
+    return reposEnv.includes(repo.name)
+  })
+  projects.value = selectedRepos
+  return
 })
 defineProps({
   projects: {
@@ -28,9 +40,7 @@ defineProps({
 })
 
 async function handleClick() {
-  const result = await execRequest(
-    `https://api.github.com/search/repositories?q=user:${config.githubUsername}&sort=stars&per_page=3`
-  )
+  const result = await execRequest(urlApiGithub)
   projects.value = result?.items
 }
 </script>
@@ -69,7 +79,7 @@ async function handleClick() {
             <p class="my-2 text-base text-gray-500 dark:text-gray-400">
               {{ project.description }}
             </p>
-            <ul class="flex items-center space-x-4 text-black dark:text-gray-200">
+            <ul v-if="config.highlightedRepoNames === 'starts'" class="flex items-center space-x-4 text-black dark:text-gray-200">
               <li class="inline-flex items-center">
                 <StartAtomIcon class="h-4 w-4 mr-1" />
                 <span>{{ project.stargazers_count }}</span>
