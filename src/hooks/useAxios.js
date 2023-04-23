@@ -25,7 +25,6 @@ export default function useAxios() {
   return {
     isLoading: isLoading.value,
     isError: isError.value,
-    isSuccess: !isError.value && !isLoading.value, 
     execRequest
   }
 }

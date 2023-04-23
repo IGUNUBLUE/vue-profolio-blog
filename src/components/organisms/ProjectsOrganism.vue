@@ -8,17 +8,26 @@ import StartAtomIcon from '@atoms/icons/StartAtomIcon.vue'
 import LoadAtomIcon from '@atoms/icons/LoadAtomIcon.vue'
 import useAxios from '@hooks/useAxios'
 
+defineProps({
+  projects: {
+    type: Array,
+    default() {
+      return []
+    }
+  }
+})
+
 const config = inject('config')
 const projects = ref([])
 const urlApiGithubStarts = `https://api.github.com/search/repositories?q=user:${config.githubUsername}&sort=stars&per_page=3`
 const urlApiGithub = `https://api.github.com/users/${config.githubUsername}/repos`
-const { isLoading, isSuccess, isError, execRequest } = useAxios()
+const { isLoading, isError, execRequest } = useAxios()
 
-onMounted(async () => {
+async function getData() {
   const isWithStarts = config.highlightedRepoNames === 'starts'
-  const result = await execRequest(isWithStarts ? urlApiGithubStarts: urlApiGithub)
+  const result = await execRequest(isWithStarts ? urlApiGithubStarts : urlApiGithub)
 
-  if(isWithStarts) {
+  if (isWithStarts) {
     projects.value = result?.items
     return
   }
@@ -29,20 +38,14 @@ onMounted(async () => {
   })
   projects.value = selectedRepos
   return
-})
-defineProps({
-  projects: {
-    type: Array,
-    default() {
-      return []
-    }
-  }
-})
-
-async function handleClick() {
-  const result = await execRequest(urlApiGithub)
-  projects.value = result?.items
 }
+async function handleClick() {
+  await getData()
+}
+
+onMounted(async () => {
+  await getData()
+})
 </script>
 
 <template>
@@ -54,7 +57,16 @@ async function handleClick() {
       <LoadAtomIcon class="h-4 w-4 ml-1" />
     </div>
   </div>
-  <div v-else-if="isSuccess" class="mt-16">
+  <div v-if="isError" class="mt-16">
+    <div
+      class="flex justify-center items-center text-base font-semibold text-gray-600 dark:text-gray-300"
+    >
+      <button @click="handleClick()" class="text-center border-2 p-2 rounded-md">
+        Reload Open Source Projects
+      </button>
+    </div>
+  </div>
+  <div v-if="!isError && !isLoading" class="mt-16">
     <div
       class="flex justify-center items-center text-base font-semibold text-gray-600 dark:text-gray-300"
     >
@@ -79,7 +91,10 @@ async function handleClick() {
             <p class="my-2 text-base text-gray-500 dark:text-gray-400">
               {{ project.description }}
             </p>
-            <ul v-if="config.highlightedRepoNames === 'starts'" class="flex items-center space-x-4 text-black dark:text-gray-200">
+            <ul
+              v-if="config.highlightedRepoNames === 'starts'"
+              class="flex items-center space-x-4 text-black dark:text-gray-200"
+            >
               <li class="inline-flex items-center">
                 <StartAtomIcon class="h-4 w-4 mr-1" />
                 <span>{{ project.stargazers_count }}</span>
@@ -103,15 +118,6 @@ async function handleClick() {
           </a>
         </div>
       </div>
-    </div>
-  </div>
-  <div v-else-if="isError" class="mt-16">
-    <div
-      class="flex justify-center items-center text-base font-semibold text-gray-600 dark:text-gray-300"
-    >
-      <button @click="handleClick()" class="text-center border-2 p-2 rounded-md">
-        Reload Open Source Projects
-      </button>
     </div>
   </div>
 </template>
