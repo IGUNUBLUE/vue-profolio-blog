@@ -17,6 +17,7 @@ const config = inject('config')
           <a
             aria-label="lenin-agc.com"
             class="text-sm underline text-gray-700 dark:text-gray-200"
+            target="_blank"
             href="https://github.com/aymaneMx/nuxt-portfolio-dev"
             >nuxt-portfolio-dev</a
           >
