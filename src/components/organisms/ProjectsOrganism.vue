@@ -80,7 +80,7 @@ onMounted(async () => {
           v-for="project in projects"
           :key="project.id"
           :href="project.html_url"
-          class="block bg-gray-50 dark:bg-gray-800 p-6 shadow rounded-lg mt-2 lg:mt-0"
+          class="block bg-gray-50 dark:bg-gray-800 p-6 shadow rounded-lg mt-2 lg:mt-0 hover:bg-primary dark:hover:bg-primary"
           rel="noreferrer"
           target="_blank"
         >
@@ -108,7 +108,7 @@ onMounted(async () => {
         </a>
         <div class="flex items-center justify-center">
           <a
-            class="bg-black w-full md:w-auto flex items-center justify-center px-10 md:px-24 py-3 shadow-md hover:bg-gray-800 rounded-lg text-white"
+            class="bg-black w-full md:w-auto flex items-center justify-center px-10 md:px-24 py-3 shadow-md hover:bg-primary rounded-lg text-white"
             :href="config.devGithubLink"
             rel="noreferrer"
             target="_blank"
