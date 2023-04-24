@@ -80,7 +80,7 @@ onMounted(async () => {
           v-for="project in projects"
           :key="project.id"
           :href="project.html_url"
-          class="block bg-gray-50 dark:bg-gray-800 p-6 shadow rounded-lg mt-2 lg:mt-0 dark:hover:bg-primary dark:hover:bg-opacity-80"
+          class="block bg-gray-50 dark:bg-gray-800 p-6 shadow rounded-lg mt-2 lg:mt-0 dark:hover:bg-primary"
           rel="noreferrer"
           target="_blank"
         >
